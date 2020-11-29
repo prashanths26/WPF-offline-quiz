@@ -1,0 +1,147 @@
+﻿<Window x:Class="SIEMENS_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SIEMENS_WPF"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Quiz Time" Height="500" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="227,154,0,0" FontSize="15" Name="lblFname" Text="First Name" VerticalAlignment="Top" Width="85" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="227,207,0,0" FontSize="15" Name="lblLname" Text="Last Name" VerticalAlignment="Top" Width="85" />
+        <TextBox Height="23" HorizontalAlignment="Left"  Margin="317,154,0,0" FontSize="17" Name="txtFname" VerticalAlignment="Top" Width="223" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="317,207,0,0" FontSize="17" Name="txtLname" VerticalAlignment="Top" Width="223" />
+        <Button Content="Start Quiz" Height="23" HorizontalAlignment="Left" Margin="436,254,0,0" Name="start" VerticalAlignment="Top" Width="104" Click="StartQuiz_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF091459" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.491"/>
+                    <GradientStop Color="#FF020B40" Offset="0.965"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <TextBlock x:Name="quest" Visibility="Hidden" Text="" FontSize="23" HorizontalAlignment="Left" Margin="64,94,0,0" VerticalAlignment="Top" Width="672" Height="48" Foreground="Black" />
+
+        <RadioButton Content="" Name="rb1" Visibility="Hidden" GroupName="rb_answers" HorizontalAlignment="Left" Margin="92,188,0,0" VerticalAlignment="Top" Checked="Option1_Click">
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+        <RadioButton Content="" Name="rb2" Visibility="Hidden" GroupName="rb_answers" HorizontalAlignment="Left" Margin="415,188,0,0" VerticalAlignment="Top" Checked="Option2_Click" >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+        <RadioButton Content="" Name="rb3" Visibility="Hidden" GroupName="rb_answers" HorizontalAlignment="Left" Margin="92,263,0,0" VerticalAlignment="Top" Checked="Option3_Click" >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+        <RadioButton Content="" Name="rb4" Visibility="Hidden" GroupName="rb_answers" HorizontalAlignment="Left" Margin="415,266,0,0" VerticalAlignment="Top" Checked="Option4_Click" >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+
+        <Label x:Name="scoreLbl" Visibility="Hidden" Content="Score : " HorizontalAlignment="Left" Margin="64,10,0,0" VerticalAlignment="Top" Width="116" Foreground="White"/>
+        <Label x:Name="final" Visibility="Hidden" Content="         Congratulations" FontSize="30" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Height="207" Width="774">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1B269B" Offset="0"/>
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF1B269B" Offset="0.4"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Button x:Name="restart" Visibility="Hidden" Content="Take Again" HorizontalAlignment="Left" FontSize="15" Margin="320,237,0,0" VerticalAlignment="Top" Width="104" Height="25" Panel.ZIndex="17" Click="ReTakeQuiz_Click" Foreground="#FF200F68">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF091459" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.491"/>
+                    <GradientStop Color="#FF020B40" Offset="0.965"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label x:Name="lblTimer" Visibility="Hidden"  Content="" Opacity="0.7" FontSize="20" HorizontalAlignment="Left" Margin="16,8,0,0" VerticalAlignment="Top" Width="90" Height="32" Foreground="Red"  />
+        <Button Content="Previous" Name="btnPrev" Visibility="Hidden" FontSize="15" HorizontalAlignment="Left" Margin="56,405,0,0" VerticalAlignment="Top" Width="75" Click="PreviousQuestion_Click" Height="24">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF091459" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.491"/>
+                    <GradientStop Color="#FF020B40" Offset="0.965"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Next" Name="btnNext" Visibility="Hidden" FontSize="15" HorizontalAlignment="Left" Margin="643,405,0,0" VerticalAlignment="Top" Width="75" Click="NextQuestion_Click" Height="24">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF091459" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.491"/>
+                    <GradientStop Color="#FF020B40" Offset="0.965"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="End Test" Visibility="Hidden" Name="btnEnd" HorizontalAlignment="Left" Margin="691,10,0,0" VerticalAlignment="Top" Width="75" FontSize="15" Background="Red" Foreground="White" Height="26" Click="EndQuiz_Click">
+        </Button>
+        <UniformGrid Name="sp" Rows="1" HorizontalAlignment="Right" Margin="0,404,156,32"  Width="480"/>
+        <TextBlock Text="" Name="lblUser" FontSize="15" HorizontalAlignment="Left" Margin="526,13,0,0" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.792,0.933" Height="21">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.259"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.745"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+            <TextBlock.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF091459" Offset="0.187"/>
+                    <GradientStop Color="#FFE7EAF1" Offset="0.457"/>
+                    <GradientStop Color="#FF091459" Offset="0.617"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+        </TextBlock>
+
+        <Label Visibility="Hidden" Name="lblStatus" Content="Answered Questions" HorizontalAlignment="Left" Margin="197,365,0,0" VerticalAlignment="Top" Height="32" Width="128">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.259"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.745"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF091459" Offset="0.187"/>
+                    <GradientStop Color="#FFE7EAF1" Offset="0.457"/>
+                    <GradientStop Color="#FF091459" Offset="0.617"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+            <ListBox Visibility="Hidden" Name="ListBoxStatus" Margin="330,367,213,72">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            <ListBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.259"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.745"/>
+                </TransformGroup>
+            </ListBox.RenderTransform>
+            <ListBox.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF091459" Offset="0.187"/>
+                    <GradientStop Color="#FFE7EAF1" Offset="0.457"/>
+                    <GradientStop Color="#FF091459" Offset="0.617"/>
+                </LinearGradientBrush>
+            </ListBox.Foreground>
+        </ListBox>
+    </Grid>
+</Window>
